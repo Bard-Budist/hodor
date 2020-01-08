@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import requests
+<<<<<<< HEAD
 url = "http://158.69.76.135/level2.php"
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Referer': 'http://158.69.76.135/level2.php'}
 
@@ -13,4 +14,4 @@ with requests.session() as client:
 			"holdthedoor": "Submit",
 			"key": key_dic['HoldTheDoor']
 		}
-        client.post(url, data=data_post, cookies={'HoldTheDoor': cookies}, headers=headers)s)
+        client.post(url, data=data_post, cookies={'HoldTheDoor': cookies}, headers=headers)
