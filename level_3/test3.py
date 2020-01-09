@@ -1,21 +1,31 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import requests
-from bs4 import BeautifulSoup
 import os
-#ch = __import__('parse_captcha').parse_captcha
+from requests import Request, Session
+#from parse_captcha import *
 
-url = "http://158.69.76.135/level2.php"
+strem = None
+verify = False
+proxies = None
+cert = None
+timeout = None
+url = "http://158.69.76.135/captcha.php"
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Referer': 'http://158.69.76.135/level2.php'}
 
 with requests.session() as client:
-    for i in range(1):
-        key = client.get(url)
-        key_dic = key.cookies.get_dict()
-		#os.system("wget " + "http://158.69.76.135/captcha.php")
-        cookies = key.cookies['HoldTheDoor']
+    for i in range(5):
+       #client.get(url)
+       # key_dic = client.cookies.get_dict()
+        key = Request('GET',url, cookies= client.cookies.get_dict())
+        prepped = client.prepare_request(key)
+        resp = client.send(prepped)
+        print(resp.cookies)
+        print("-------------------")
+        print(client.cookies)
         data_post = {
 			"id": 1,
 			"holdthedoor": "Submit",
-			"key": key_dic['HoldTheDoor']
+			#"key": key_dic['HoldTheDoor']
+                        #"captcha": f.read()
 		}
-        client.post(url, data=data_post, cookies={'HoldTheDoor': cookies}, headers=headers)
+        #client.post(url, data=data_post, cookies={'HoldTheDoor': cookies}, headers=headers)
