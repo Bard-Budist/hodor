@@ -65,7 +65,7 @@ urlProxies = "https://free-proxy-list.net/index.html"
 i = 0
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Referer': 'http://158.69.76.135/level4.php'}
 with requests.session() as client:
-    while i  < 10:
+    while i  < 3:
         lenProxi = 0
         os.environ["HTTP_PROXY"] = ""
         votes = getVotes(url, int(sys.argv[1]))
@@ -83,7 +83,7 @@ with requests.session() as client:
         #os.environ["HTTP_PROXY"] = "http://112.78.191.35:8080"
         #os.system("export HTTP_PROXY=" + '"' + "110.74.222.213:52733" + '"')
         try:
-            client.post(url, data=data_post, headers = headers, cookies={'HoldTheDoor': cookies}, timeout=8)
+            client.post(url, data=data_post, headers = headers, cookies={'HoldTheDoor': cookies}, timeout=10)
             os.environ["HTTP_PROXY"] = ""
             if (int(getVotes(url, int(sys.argv[1]))) > int(votes)):
                 print('\x1b[6;30;42m' + 'Success!' + '\x1b[0m')
