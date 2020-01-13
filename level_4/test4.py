@@ -33,15 +33,6 @@ def getProxies(url):
         proxiReturn.append(str(listProxies[ran]))
     return proxiReturn
 
-
-
-
-
-
-
-
-
-
 def getVotes(url, id):
     lent = 0
     listId = []
